@@ -1,16 +1,40 @@
 {
   "name": "vision-generator-mcp",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "description": "Local MCP server for image and video generation via OpenAI-compatible providers",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rayss868/vision-generator-mcp.git"
+  },
+  "homepage": "https://github.com/rayss868/vision-generator-mcp",
+  "bugs": {
+    "url": "https://github.com/rayss868/vision-generator-mcp/issues"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "image-generation",
+    "video-generation",
+    "openai-compatible"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
   "bin": {
     "vision-generator-mcp": "build/index.js"
   },
+  "files": [
+    "build",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc && node -e \"require('fs').chmodSync('build/index.js', '755')\"",
     "dev": "tsx src/index.ts",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "prepare": "npm run build"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.12.1",

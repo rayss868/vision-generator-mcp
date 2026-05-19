@@ -166,7 +166,17 @@ Most image/video APIs force clients to understand:
 - npm
 - an OpenAI-compatible provider endpoint
 
-### Install dependencies
+### Install from npm
+```bash
+npm install -g vision-generator-mcp
+```
+
+### Run installed binary
+```bash
+vision-generator-mcp
+```
+
+### Local development install
 ```bash
 npm install
 ```
@@ -180,6 +190,11 @@ npm run check
 ```bash
 npm run build
 ```
+
+### Publishable package notes
+- CLI entry is exposed via [`bin`](package.json:20)
+- installable package files are limited via [`files`](package.json:23)
+- build runs automatically before publish/install from source via [`prepare`](package.json:31)
 
 ---
 
