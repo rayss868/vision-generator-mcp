@@ -61,6 +61,7 @@ export interface ToolOutput {
   mime_type: string;
   final_path?: string;
   download_url?: string;
+  base64_data?: string;
   width?: number;
   height?: number;
   duration_seconds?: number;
