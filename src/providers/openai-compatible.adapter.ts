@@ -54,6 +54,8 @@ export class OpenAICompatibleAdapter implements ProviderAdapter {
     };
 
     if (input.negative_prompt) payload.negative_prompt = input.negative_prompt;
+    if (input.reference_text) payload.reference_text = input.reference_text;
+    if (input.reference_images) payload.reference_images = input.reference_images;
     if (input.aspect_ratio) payload.aspect_ratio = input.aspect_ratio;
     if (input.resolution) payload.size = input.resolution;
     if (input.seed !== undefined) payload.seed = input.seed;
@@ -86,6 +88,15 @@ export class OpenAICompatibleAdapter implements ProviderAdapter {
     form.append('response_format', 'b64_json');
 
     if (input.negative_prompt) form.append('negative_prompt', input.negative_prompt);
+    if (input.reference_text) form.append('reference_text', input.reference_text);
+    if (input.reference_images) {
+      for (const referencePath of input.reference_images) {
+        form.append('reference_images', await fs.readFile(referencePath), {
+          filename: path.basename(referencePath),
+          contentType: coerceMimeType(referencePath),
+        });
+      }
+    }
     if (input.aspect_ratio) form.append('aspect_ratio', input.aspect_ratio);
     if (input.resolution) form.append('size', input.resolution);
     if (input.seed !== undefined) form.append('seed', String(input.seed));
@@ -133,6 +144,14 @@ export class OpenAICompatibleAdapter implements ProviderAdapter {
     };
 
     if (input.negative_prompt) payload.negative_prompt = input.negative_prompt;
+    if (input.reference_text) payload.reference_text = input.reference_text;
+    if (input.reference_images) {
+      payload.reference_images = await Promise.all(
+        input.reference_images.map(async (referencePath) =>
+          (await fs.readFile(referencePath)).toString('base64')
+        )
+      );
+    }
     if (input.duration_seconds !== undefined) payload.duration_seconds = input.duration_seconds;
     if (input.fps !== undefined) payload.fps = input.fps;
     if (input.aspect_ratio) payload.aspect_ratio = input.aspect_ratio;

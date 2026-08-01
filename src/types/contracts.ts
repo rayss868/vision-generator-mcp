@@ -18,6 +18,8 @@ export interface GenerateImageInput {
   model: string;
   prompt: string;
   negative_prompt?: string;
+  reference_text?: string;
+  reference_images?: string[];
   aspect_ratio?: '1:1' | '4:5' | '16:9' | '9:16';
   resolution?: string;
   seed?: number;
@@ -35,6 +37,8 @@ export interface GenerateVideoInput {
   model: string;
   prompt: string;
   negative_prompt?: string;
+  reference_text?: string;
+  reference_images?: string[];
   duration_seconds?: number;
   fps?: number;
   aspect_ratio?: '1:1' | '4:5' | '16:9' | '9:16';

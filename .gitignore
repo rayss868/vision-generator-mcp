@@ -22,6 +22,9 @@ outputs/
 # Local memory / notes
 .memory/
 
+# Codebase-memory MCP graph artifact (regenerable via index_repository)
+.codebase-memory/
+
 # OS / temp
 *.tmp
 *.temp

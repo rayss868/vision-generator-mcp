@@ -1,11 +1,13 @@
 import { z } from 'zod';
-import { AspectRatioSchema, SafetyLevelSchema } from './common.js';
+import { AspectRatioSchema, ReferenceImagesSchema, ReferenceTextSchema, SafetyLevelSchema } from './common.js';
 import { OutputSchema } from './output.js';
 
 export const GenerateVideoSchema = z.object({
   model: z.string().min(1),
   prompt: z.string().min(1).max(5000),
   negative_prompt: z.string().max(5000).optional(),
+  reference_text: ReferenceTextSchema.optional(),
+  reference_images: ReferenceImagesSchema.optional(),
   duration_seconds: z.number().min(1).max(60).optional(),
   fps: z.number().int().min(1).max(60).optional(),
   aspect_ratio: AspectRatioSchema.optional(),
